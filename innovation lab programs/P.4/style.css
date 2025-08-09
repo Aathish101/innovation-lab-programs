@@ -1,0 +1,28 @@
+body {
+    background-image: url('https://i.ibb.co/8nfyhNS7/download.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    background-color: white;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+label {
+    font-style: italic;
+    background-color: white;
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+}

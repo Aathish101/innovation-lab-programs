@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registration Form</title>
+  <style>
+    body {
+      background-image: url('https://i.ibb.co/8nfyhNS7/download.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    h2 {
+      background-color: white;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+    label {
+      font-style: italic;
+      background-color: white;
+      padding: 3px 5px;
+      border-radius: 3px;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <h2>REGISTRATION FORM</h2>
+    <form id="registrationform" onsubmit="return onSubmitHandler(event)">
+      <label for="name">NAME</label><br />
+      <input type="text" name="name" id="name" required />
+      <div id="nameError" class="error"></div>
+      <br /><br />
+
+      <label for="email">EMAIL:</label><br />
+      <input type="text" name="email" id="email" required />
+      <div id="emailError" class="error"></div>
+      <br /><br />
+
+      <label for="Password">PASSWORD:</label><br />
+      <input type="text" name="Password" id="password" required />
+      <div id="PasswordError" class="error"></div>
+      <br /><br />
+
+      <label for="Phone">PHONE NUMBER:</label><br />
+      <input type="text" name="Phone" id="phone" required />
+      <div id="PhoneError" class="error"></div>
+      <br /><br />
+
+      <button type="submit">SUBMIT</button><br />
+    </form>
+  </center>
+
+  <script>
+    function vaildateName(name) {
+      const regex = /^[A-Za-z\s]+$/;
+      if (name.trim() === "") {
+        return "Name cannot be empty";
+      }
+      if (!regex.test(name)) {
+        return "Name can only contain letters and spaces";
+      }
+      return "";
+    }
+
+    function vaildateEmail(email) {
+      const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      if (email.trim() === "") {
+        return "Email cannot be empty";
+      }
+      if (!regex.test(email)) {
+        return "Invalid email format";
+      }
+      return "";
+    }
+
+    function vaildatePassword(password) {
+      const regex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+      if (password.trim() === "") {
+        return "Password cannot be empty";
+      }
+      if (!regex.test(password)) {
+        return "Password must be at least 8 characters long, contain an uppercase letter and a number";
+      }
+      return "";
+    }
+
+    function vaildatePhone(phone) {
+      const regex = /^[0-9]{10}$/;
+      if (phone.trim() === "") {
+        return "Phone number cannot be empty";
+      }
+      if (!regex.test(phone)) {
+        return "Phone number must be exactly 10 digits";
+      }
+      return "";
+    }
+
+    function vaildateform() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const phone = document.getElementById("phone").value;
+
+      const nameError = vaildateName(name);
+      const emailError = vaildateEmail(email);
+      const passwordError = vaildatePassword(password);
+      const phoneError = vaildatePhone(phone);
+
+      document.getElementById("nameError").innerText = nameError;
+      document.getElementById("emailError").innerText = emailError;
+      document.getElementById("PasswordError").innerText = passwordError;
+      document.getElementById("PhoneError").innerText = phoneError;
+
+      // Return true only if all errors are empty strings
+      return !(nameError || emailError || passwordError || phoneError);
+    }
+
+    function onSubmitHandler(event) {
+      event.preventDefault(); // stop form submission
+      const valid = vaildateform();
+      if (valid) {
+        alert("Form submitted successfully!");
+        // Optionally, submit the form here if needed:
+        // document.getElementById("registrationform").submit();
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
